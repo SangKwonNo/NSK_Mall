@@ -17,6 +17,9 @@ public class MemberDAO {
 	private MemberDAO() {
 		memberList = new ArrayList<>();
 		memberList.add(new Member("admin", "admin", "admin"));
+		memberList.add(new Member("qwer", "1234", "±èÃ¶¼ö"));
+		memberList.add(new Member("asdf", "1234", "ÀÌ¿µÈñ"));
+		memberList.add(new Member("zxcv", "1234", "ÀÌ¹Î¼ö"));
 	}
 
 	public void addMember(Member member) {

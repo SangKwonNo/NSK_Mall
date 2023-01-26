@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import _mall.MenuCommand;
 import _mall._Main;
 import controller.MallController;
+import item.Item;
 import item.ItemDAO;
 
 public class Admin_delItem implements MenuCommand {
@@ -26,6 +27,7 @@ public class Admin_delItem implements MenuCommand {
 		System.out.println("[ 삭제할 아이템 카테고리 입력 ]");
 		int sel = _Main.sc.nextInt();
 		String selCategory = categoryList.get(sel - 1);
+		showSelCategoryItem(selCategory, itemDAO.getItemList());
 		System.out.println("[ 삭제할 아이템 입력 ]");
 		String name = _Main.sc.next();
 		int delIdx = itemDAO.isItem(name, selCategory);
@@ -43,6 +45,15 @@ public class Admin_delItem implements MenuCommand {
 		for (String category : categoryList) {
 			System.out.println(categoryNumber + ") " + category);
 			categoryNumber++;
+		}
+	}
+
+	private void showSelCategoryItem(String selCategory, ArrayList<Item> itemList) {
+		int itemNumber = 1;
+		for (Item item : itemList) {
+			if (item.getCategoryName().equals(selCategory)) {
+				System.out.println(item.getName());
+			}
 		}
 	}
 }

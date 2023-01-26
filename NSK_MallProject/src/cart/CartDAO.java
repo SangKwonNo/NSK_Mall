@@ -13,9 +13,17 @@ public class CartDAO {
 	private CartDAO() {
 		cartList = new ArrayList<>();
 	}
-	
+
 	public ArrayList<Cart> getCartList() {
 		return cartList;
+	}
+	
+	public void delCart(int delIdx) {
+		cartList.remove(delIdx);
+	}
+	
+	public void delAllCart() {
+		cartList = null;
 	}
 	
 	public Cart findCart(String id) {
@@ -25,5 +33,9 @@ public class CartDAO {
 			}
 		}
 		return null;
+	}
+
+	public void addCart(Cart cart) {
+		cartList.add(cart);
 	}
 }

@@ -18,9 +18,12 @@ import menu_admin.Admin_showMemberList;
 import menu_mall.Mall_Login;
 import menu_mall.Mall_Main;
 import menu_mall.Mall_SignUp;
+import menu_member.Member_Cart;
 import menu_member.Member_Main;
+import menu_member.Member_Shop;
 import menu_member.Member_addCart;
 import menu_member.Member_buyCart;
+import menu_member.Member_delAllCart;
 import menu_member.Member_delCart;
 import menu_member.Member_showCart;
 import menu_member.Member_showInfo;
@@ -29,14 +32,18 @@ public class MallController {
 	private static MallController mallCon = new MallController();
 	private Map<String, MenuCommand> menuList;
 	private MenuCommand menuCommand;
-	private String MemberID;
+	private String memberID;
 
 	public static MallController getMallCon() {
 		return mallCon;
 	}
 
-	public void setMemberID(String MemberID) {
-		this.MemberID = MemberID;
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
+	}
+
+	public String getMemberID() {
+		return memberID;
 	}
 
 	private MallController() {
@@ -52,17 +59,20 @@ public class MallController {
 		menuList.put("Admin_showCartList", new Admin_showCartList());
 		menuList.put("Admin_showMemberList", new Admin_showMemberList());
 		menuList.put("Admin_showItemList", new Admin_showItemList());
-		
+
 		menuList.put("Mall_Login", new Mall_Login());
 		menuList.put("Mall_Main", new Mall_Main());
 		menuList.put("Mall_SignUp", new Mall_SignUp());
 
+		menuList.put("Member_Cart", new Member_Cart());
 		menuList.put("Member_addCart", new Member_addCart());
 		menuList.put("Member_buyCart", new Member_buyCart());
 		menuList.put("Member_delCart", new Member_delCart());
+		menuList.put("Member_delAllCart", new Member_delAllCart());
 		menuList.put("Member_Main", new Member_Main());
 		menuList.put("Member_showCart", new Member_showCart());
 		menuList.put("Member_showInfo", new Member_showInfo());
+		menuList.put("Member_Shop", new Member_Shop());
 	}
 
 	public void menuControl(String key) {
