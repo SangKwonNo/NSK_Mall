@@ -22,8 +22,12 @@ public class CartDAO {
 		cartList.remove(delIdx);
 	}
 	
-	public void delAllCart() {
-		cartList = null;
+	public void delAllCart(String logInID) {
+		for (Cart cart : cartList) {
+			if (logInID.equals(cart.getMemberID())) {
+				cart = null;
+			}
+		}
 	}
 	
 	public Cart findCart(String id) {

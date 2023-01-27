@@ -17,9 +17,9 @@ public class MemberDAO {
 	private MemberDAO() {
 		memberList = new ArrayList<>();
 		memberList.add(new Member("admin", "admin", "admin"));
-		memberList.add(new Member("qwer", "1234", "±èÃ¶¼ö"));
-		memberList.add(new Member("asdf", "1234", "ÀÌ¿µÈñ"));
-		memberList.add(new Member("zxcv", "1234", "ÀÌ¹Î¼ö"));
+		memberList.add(new Member("qwer", "qwer", "±èÃ¶¼ö"));
+		memberList.add(new Member("asdf", "asdf", "ÀÌ¿µÈñ"));
+		memberList.add(new Member("zxcv", "zxcv", "ÀÌ¹Î¼ö"));
 	}
 
 	public void addMember(Member member) {
@@ -36,8 +36,8 @@ public class MemberDAO {
 		if (idx == -1) {
 			return idx;
 		}
-		if (memberList.get(idx).getPw().equals(pw)) {
-			return idx;
+		if (!memberList.get(idx).getPw().equals(pw)) {
+			idx = -1;
 		}
 		return idx;
 	}

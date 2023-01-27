@@ -27,6 +27,13 @@ import menu_member.Member_delAllCart;
 import menu_member.Member_delCart;
 import menu_member.Member_showCart;
 import menu_member.Member_showInfo;
+import menu_order.Order_DeliveryFalse;
+import menu_order.Order_DeliveryTrue;
+import menu_order.Order_Load;
+import menu_order.Order_Main;
+import menu_order.Order_PrintAll;
+import menu_order.Order_PrintSearchOrder;
+import menu_order.Order_Save;
 
 public class MallController {
 	private static MallController mallCon = new MallController();
@@ -59,6 +66,14 @@ public class MallController {
 		menuList.put("Admin_showCartList", new Admin_showCartList());
 		menuList.put("Admin_showMemberList", new Admin_showMemberList());
 		menuList.put("Admin_showItemList", new Admin_showItemList());
+
+		menuList.put("Order_DeliveryFalse", new Order_DeliveryFalse());
+		menuList.put("Order_DeliveryTrue", new Order_DeliveryTrue());
+		menuList.put("Order_Load", new Order_Load());
+		menuList.put("Order_Main", new Order_Main());
+		menuList.put("Order_PrintAll", new Order_PrintAll());
+		menuList.put("Order_PrintSearchOrder", new Order_PrintSearchOrder());
+		menuList.put("Order_Save", new Order_Save());
 
 		menuList.put("Mall_Login", new Mall_Login());
 		menuList.put("Mall_Main", new Mall_Main());

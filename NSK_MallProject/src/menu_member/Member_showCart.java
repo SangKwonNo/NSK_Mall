@@ -21,6 +21,7 @@ public class Member_showCart implements MenuCommand {
 	@Override
 	public String update() {
 		String key = "Member_Cart";
+
 		System.out.println("===============");
 		showCartList(cartDAO.getCartList());
 		System.out.println("===============");
@@ -30,7 +31,10 @@ public class Member_showCart implements MenuCommand {
 	private void showCartList(ArrayList<Cart> cartList) {
 		int cartNumber = 1;
 		for (Cart cart : cartList) {
-			System.out.println(cartNumber + " )" + cart.toString());
+			if (cart.getMemberID().equals(mallCon.getMemberID())) {
+				System.out.println(cartNumber + ") " + cart.toString());
+				cartNumber++;
+			}
 		}
 	}
 }

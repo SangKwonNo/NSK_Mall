@@ -18,7 +18,7 @@ public class Member_delAllCart implements MenuCommand {
 	@Override
 	public String update() {
 		String key = "Member_Cart";
-		cartDAO.delAllCart();
+		cartDAO.delAllCart(mallCon.getMemberID());
 		System.out.println("[ 전부 삭제 완료 ]");
 		return key;
 	}

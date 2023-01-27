@@ -3,24 +3,26 @@ package menu_member;
 import java.util.ArrayList;
 
 import _mall.MenuCommand;
-import _mall._Main;
 import cart.Cart;
 import cart.CartDAO;
 import controller.MallController;
 import item.Item;
 import item.ItemDAO;
+import myUtil.Util;
 
 public class Member_addCart implements MenuCommand {
 
 	private MallController mallCon;
 	private ItemDAO itemDAO;
 	private CartDAO cartDAO;
+	private Util util;
 
 	@Override
 	public void init() {
 		mallCon = MallController.getMallCon();
 		itemDAO = ItemDAO.getItemDAO();
 		cartDAO = CartDAO.getCartDAO();
+		util = Util.getUtil();
 	}
 
 	@Override
@@ -28,18 +30,26 @@ public class Member_addCart implements MenuCommand {
 		String key = "Member_Shop";
 		ArrayList<String> categoryList = itemDAO.getCategoryList();
 		ArrayList<Item> itemList = itemDAO.getItemList();
+		
 		showCategory(categoryList);
-		System.out.println("[ 카테고리 선택 ]");
-		int sel = _Main.sc.nextInt() - 1;
-		String selCategory = categoryList.get(sel);
+		int sel = util.getInt("[ 카테고리 선택 ]", 1, categoryList.size());
+		if (sel == -1) {
+			return key;
+		}
+		
+		String selCategory = categoryList.get(sel - 1);
 		showSelCategoryItem(selCategory, itemList);
-		System.out.println("[ 추가할 아이템 입력 ]");
-		String name = _Main.sc.next();
+		
+		String name = util.getName("[ 추가할 아이템 입력 ]");
+		if (name == null) {
+			return key;
+		}
+		
 		int idx = itemDAO.isItem(name, selCategory);
 		if(idx == -1) {
 			System.err.println("[ 입력한 아이템 없음 ]");
 		} else {
-			cartDAO.addCart(new Cart(mallCon.getMemberID(), name, itemList.get(idx).getPrice()));
+			cartDAO.addCart(new Cart(mallCon.getMemberID(), itemDAO.getItemList().get(idx)));
 			System.out.println("[ 장바구니 추가 완료 ]");
 		}
 		return key;

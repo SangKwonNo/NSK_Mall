@@ -1,14 +1,14 @@
 package cart;
 
+import item.Item;
+
 public class Cart {
 	private String memberID;
-	private String name;
-	private int price;
+	private Item item;
 
-	public Cart(String memberID, String name, int price) {
+	public Cart(String memberID, Item item) {
 		this.memberID = memberID;
-		this.name = name;
-		this.price = price;
+		this.item = item;
 	}
 
 	public String getMemberID() {
@@ -19,25 +19,17 @@ public class Cart {
 		this.memberID = memberID;
 	}
 
-	public String getName() {
-		return name;
+	public Item getItem() {
+		return item;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
+	public void setItem() {
+		this.item = item;
 	}
 
 	@Override
 	public String toString() {
-		return "Cart [memberID=" + memberID + ", name=" + name + ", price=" + price + "]";
+		return item.toString();
 	}
 
 }

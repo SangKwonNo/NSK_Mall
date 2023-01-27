@@ -1,23 +1,24 @@
 package menu_member;
 
 import _mall.MenuCommand;
-import _mall._Main;
 import controller.MallController;
+import myUtil.Util;
 
-public class Member_Main implements MenuCommand{
-	
+public class Member_Main implements MenuCommand {
+
 	private MallController mallCon;
-	
+	private Util util;
+
 	@Override
 	public void init() {
 		mallCon = MallController.getMallCon();
+		util = Util.getUtil();
 	}
 
 	@Override
 	public String update() {
 		String key = "Member_Main";
-		System.out.println("[1.쇼핑][2.장바구니목록][3.회원정보][0.로그아웃]");
-		int sel = _Main.sc.nextInt();
+		int sel = util.getInt(getMenu(), 0, 3);
 		if (sel == 1) {
 			key = "Member_Shop";
 		} else if (sel == 2) {
@@ -31,4 +32,8 @@ public class Member_Main implements MenuCommand{
 		return key;
 	}
 
+	private String getMenu() {
+		String menu = "[1.쇼핑]\n[2.장바구니]\n[3.회원정보]\n[0.로그아웃]";
+		return menu;
+	}
 }

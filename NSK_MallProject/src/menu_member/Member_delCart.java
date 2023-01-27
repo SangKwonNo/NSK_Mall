@@ -3,20 +3,22 @@ package menu_member;
 import java.util.ArrayList;
 
 import _mall.MenuCommand;
-import _mall._Main;
 import cart.Cart;
 import cart.CartDAO;
 import controller.MallController;
+import myUtil.Util;
 
 public class Member_delCart implements MenuCommand {
 
 	private MallController mallCon;
 	private CartDAO cartDAO;
+	private Util util;
 
 	@Override
 	public void init() {
 		mallCon = MallController.getMallCon();
 		cartDAO = CartDAO.getCartDAO();
+		util = Util.getUtil();
 	}
 
 	@Override
@@ -25,9 +27,12 @@ public class Member_delCart implements MenuCommand {
 		ArrayList<Cart> cartList = cartDAO.getCartList();
 
 		showCartList(cartList);
-		System.out.println("[ 삭제할 번호 입력 ]");
-		int sel = _Main.sc.nextInt();
-		cartDAO.delCart(sel);
+		int sel = util.getInt("[ 삭제할 번호 입력 ]", 1, cartList.size());
+		if (sel == -1) {
+			return key;
+		}
+
+		cartDAO.delCart(sel - 1);
 		System.out.println("[ 품목 삭제 완료 ]");
 		return key;
 	}

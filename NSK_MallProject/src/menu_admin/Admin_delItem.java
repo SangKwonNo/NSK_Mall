@@ -3,20 +3,22 @@ package menu_admin;
 import java.util.ArrayList;
 
 import _mall.MenuCommand;
-import _mall._Main;
 import controller.MallController;
 import item.Item;
 import item.ItemDAO;
+import myUtil.Util;
 
 public class Admin_delItem implements MenuCommand {
 
 	private MallController mallCon;
 	private ItemDAO itemDAO;
+	private Util util;
 
 	@Override
 	public void init() {
 		mallCon = MallController.getMallCon();
 		itemDAO = ItemDAO.getItemDAO();
+		util = Util.getUtil();
 	}
 
 	@Override
@@ -24,12 +26,19 @@ public class Admin_delItem implements MenuCommand {
 		String key = "Admin_ItemMenu";
 		ArrayList<String> categoryList = itemDAO.getCategoryList();
 		showCategoryList(categoryList);
-		System.out.println("[ 삭제할 아이템 카테고리 입력 ]");
-		int sel = _Main.sc.nextInt();
+
+		int sel = util.getInt("[ 삭제할 아이템 카테고리 입력 ]", 1, categoryList.size());
+		if (sel == -1) {
+			return key;
+		}
 		String selCategory = categoryList.get(sel - 1);
+
 		showSelCategoryItem(selCategory, itemDAO.getItemList());
-		System.out.println("[ 삭제할 아이템 입력 ]");
-		String name = _Main.sc.next();
+		String name = util.getName("[ 삭제할 아이템 입력 ]");
+		if (name == null) {
+			return key;
+		}
+		
 		int delIdx = itemDAO.isItem(name, selCategory);
 		if (delIdx == -1) {
 			System.err.println("[ 존재하지 않는 아이템 ]");
