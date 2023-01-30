@@ -4,24 +4,21 @@ import _mall.MenuCommand;
 import cart.Cart;
 import cart.CartDAO;
 import controller.MallController;
-import order.OrderDAO;
 
 public class Member_buyCart implements MenuCommand {
 
 	private MallController mallCon;
 	private CartDAO cartDAO;
-	private OrderDAO orderDAO;
 
 	@Override
 	public void init() {
 		mallCon = MallController.getMallCon();
 		cartDAO = CartDAO.getCartDAO();
-		orderDAO = OrderDAO.getOrderDAO();
 	}
 
 	@Override
 	public String update() {
-		String key = "Order_Save";
+		String key = "Member_Main";
 		int totalPrice = 0;
 		String logInID = mallCon.getMemberID();
 
